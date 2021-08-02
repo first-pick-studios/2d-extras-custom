@@ -731,9 +731,9 @@ namespace UnityEngine
             for (int i = 0; i < minCount; i++)
             {
                 int neighbor = rule.m_Neighbors[i];
-                Vector3Int positionOffset = GetRotatedPosition(rule.m_NeighborPositions[i], angle);
-                TileBase other = tilemap.GetTile(GetOffsetPosition(position, positionOffset));
-                if (!RuleMatch(neighbor, other, position))
+                Vector3Int positionWithOffset = GetOffsetPosition(position, GetRotatedPosition(rule.m_NeighborPositions[i], angle));
+                TileBase other = tilemap.GetTile(positionWithOffset);
+                if (!RuleMatch(neighbor, other, positionWithOffset))
                 {
                     return false;
                 }
@@ -756,9 +756,9 @@ namespace UnityEngine
             for (int i = 0; i < minCount; i++)
             {
                 int neighbor = rule.m_Neighbors[i];
-                Vector3Int positionOffset = GetMirroredPosition(rule.m_NeighborPositions[i], mirrorX, mirrorY);
-                TileBase other = tilemap.GetTile(GetOffsetPosition(position, positionOffset));
-                if (!RuleMatch(neighbor, other, position))
+                Vector3Int positionWithOffset = GetOffsetPosition(position, GetMirroredPosition(rule.m_NeighborPositions[i], mirrorX, mirrorY));
+                TileBase other = tilemap.GetTile(positionWithOffset);
+                if (!RuleMatch(neighbor, other, positionWithOffset))
                 {
                     return false;
                 }
