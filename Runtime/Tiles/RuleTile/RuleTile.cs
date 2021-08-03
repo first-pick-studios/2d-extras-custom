@@ -704,7 +704,7 @@ namespace UnityEngine
         /// <param name="neighbor">Neighbor matching rule.</param>
         /// <param name="other">Tile to match.</param>
         /// <returns>True if there is a match, False if not.</returns>
-        public virtual bool RuleMatch(int neighbor, TileBase other, Vector3Int position)
+        public virtual bool RuleMatch(int neighbor, TileBase other, ITilemap tilemap, Vector3Int position)
         {
             if (other is RuleOverrideTile ot)
                 other = ot.m_InstanceTile;
@@ -733,7 +733,7 @@ namespace UnityEngine
                 int neighbor = rule.m_Neighbors[i];
                 Vector3Int positionWithOffset = GetOffsetPosition(position, GetRotatedPosition(rule.m_NeighborPositions[i], angle));
                 TileBase other = tilemap.GetTile(positionWithOffset);
-                if (!RuleMatch(neighbor, other, positionWithOffset))
+                if (!RuleMatch(neighbor, other, tilemap, positionWithOffset))
                 {
                     return false;
                 }
@@ -758,7 +758,7 @@ namespace UnityEngine
                 int neighbor = rule.m_Neighbors[i];
                 Vector3Int positionWithOffset = GetOffsetPosition(position, GetMirroredPosition(rule.m_NeighborPositions[i], mirrorX, mirrorY));
                 TileBase other = tilemap.GetTile(positionWithOffset);
-                if (!RuleMatch(neighbor, other, positionWithOffset))
+                if (!RuleMatch(neighbor, other, tilemap, positionWithOffset))
                 {
                     return false;
                 }
